@@ -1,0 +1,21 @@
+[user]
+  name = Ben Trevor
+  email = btrevor@8thlight.com
+
+[core]
+  excludesfile = /Users/ben/.gitignore_global
+
+[color]
+  status = auto
+  branch = auto
+  interactive = auto
+  diff = auto
+  grep = auto
+
+[push]
+  default = simple
+
+[alias]
+  st = status
+  co = checkout
+  br = branch
