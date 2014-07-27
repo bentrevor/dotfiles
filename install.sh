@@ -51,7 +51,7 @@ function set_bundler_jobs() {
 function link_dotfiles() {
     for dotfile in "${dotfiles[@]}"
     do
-        target_path="$HOME/dotfiles/$dotfile"
+        target_path="$HOME/.dotfiles/$dotfile"
         link_path=$(path_for $dotfile)
 
         make_backup $link_path
