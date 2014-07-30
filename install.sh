@@ -99,7 +99,11 @@ function make_backup() {
     backup_file=$(backup_for $dotfile)
 
     if [[ -f $dotfile ]]; then
-        mv $dotfile $backup_file
+        if [[ -h $dotfile ]]; then
+            mv $(realpath $dotfile) $backup_file
+        else
+            mv $dotfile $backup_file
+        fi
 
         if verbose; then
             echo "created backup file $(change_color $green $backup_file)\n"
