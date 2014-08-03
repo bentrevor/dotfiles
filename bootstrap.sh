@@ -1,17 +1,18 @@
 #!/usr/bin/env sh
 
 dotfiles=(
-    'bundlerrc'
+    # 'bundlerrc'
     'gemrc'
-    'gitconfig'
-    'gitignore_global'
-    'pryrc'
-    'ruby-version'
+    # 'gitconfig'
+    # 'gitignore_global'
+    # 'pryrc'
+    # 'ruby-version'
 )
 
 timestamp=$(date +"%Y%m%d%H%M%S")
 bundler_jobs=1
 verbose_output=false
+bundler_jobs_set=false
 
 function parse_args() {
     for opt in "$@"
@@ -19,6 +20,7 @@ function parse_args() {
         case "$opt" in
             -bj=* | --bundler-jobs=*)
                 bundler_jobs="${opt#*=}"
+                bundler_jobs_set=true
                 ;;
 
             -v | --verbose)
@@ -38,8 +40,12 @@ function set_bundler_jobs() {
     sed -i "" -e "s/BUNDLE_JOBS: .[0-9]./BUNDLE_JOBS: '${bundler_jobs}'/g" bundlerrc
 
     if verbose; then
-        echo "set bundler jobs to $bundler_jobs\n"
+        if [[ "$bundler_jobs_set" = true ]]; then
+            echo "set bundler jobs to $bundler_jobs\n"
+        fi
+
         echo "selected dotfiles:"
+
         for df in "${dotfiles[@]}"
         do
             echo "\t$df"
@@ -54,8 +60,10 @@ function link_dotfiles() {
         target_path="$HOME/.dotfiles/$dotfile"
         link_path=$(path_for $dotfile)
 
-        make_backup $link_path
-        ln -s $target_path $link_path
+        echo "$target_path"
+
+        # make_backup $link_path
+        # ln -s $target_path $link_path
 
         if verbose; then
             green_link=$(change_color $green $link_path)
