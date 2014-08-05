@@ -1,12 +1,12 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 dotfiles=(
-    # 'bundlerrc'
+    'bundlerrc'
     'gemrc'
-    # 'gitconfig'
-    # 'gitignore_global'
-    # 'pryrc'
-    # 'ruby-version'
+    'gitconfig'
+    'gitignore_global'
+    'pryrc'
+    'ruby-version'
 )
 
 timestamp=$(date +"%Y%m%d%H%M%S")
@@ -57,18 +57,16 @@ function set_bundler_jobs() {
 function link_dotfiles() {
     for dotfile in "${dotfiles[@]}"
     do
-        target_path="$HOME/.dotfiles/$dotfile"
+        target_path="$HOME/dotfiles/$dotfile"
         link_path=$(path_for $dotfile)
 
-        echo "$target_path"
-
-        # make_backup $link_path
+        make_backup $link_path
         # ln -s $target_path $link_path
 
         if verbose; then
             green_link=$(change_color $green $link_path)
             green_target=$(change_color $green $target_path)
-            echo "linked $(change_color $green $link_path) to $(change_color $green $target_path)"
+            echo "linked $(change_color $green $link_path) to $(change_color $green $target_path)\n"
         fi
     done
 }
@@ -106,15 +104,11 @@ function make_backup() {
     dotfile=$1
     backup_file=$(backup_for $dotfile)
 
-    if [[ -f $dotfile ]]; then
-        if [[ -h $dotfile ]]; then
-            mv $(realpath $dotfile) $backup_file
-        else
-            mv $dotfile $backup_file
-        fi
+    if [[ -e $dotfile ]]; then
+        cat $dotfile > $backup_file
 
         if verbose; then
-            echo "created backup file $(change_color $green $backup_file)\n"
+            echo "created backup file $(change_color $green $backup_file)"
         fi
     fi
 }
