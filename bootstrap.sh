@@ -61,7 +61,7 @@ function link_dotfiles() {
         link_path=$(path_for $dotfile)
 
         make_backup $link_path
-        # ln -s $target_path $link_path
+        ln -s $target_path $link_path
 
         if verbose; then
             green_link=$(change_color $green $link_path)
@@ -105,7 +105,9 @@ function make_backup() {
     backup_file=$(backup_for $dotfile)
 
     if [[ -e $dotfile ]]; then
+        # mv wasn't working for ~/.bundle/config for some reason
         cat $dotfile > $backup_file
+        rm $dotfile
 
         if verbose; then
             echo "created backup file $(change_color $green $backup_file)"
