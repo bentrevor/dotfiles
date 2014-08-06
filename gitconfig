@@ -3,7 +3,7 @@
   email = btrevor@8thlight.com
 
 [core]
-  excludesfile = /Users/ben/.gitignore_global
+  excludesfile = ~/.gitignore_global
 
 [color]
   status = auto
