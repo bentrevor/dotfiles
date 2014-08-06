@@ -11,8 +11,9 @@ dotfiles=(
 
 timestamp=$(date +"%Y%m%d%H%M%S")
 bundler_jobs=1
-verbose_output=false
 bundler_jobs_set=false
+bundler_path="$HOME/.bundle"
+verbose_output=false
 
 function parse_args() {
     for opt in "$@"
@@ -94,7 +95,7 @@ function backup_for() {
 
 function path_for() {
     if [[ $1 == 'bundlerrc' ]]; then
-        echo "$HOME/.bundle/config"
+        echo "$bundler_path/config"
     else
         echo "$HOME/.$1"
     fi
@@ -103,6 +104,10 @@ function path_for() {
 function make_backup() {
     dotfile=$1
     backup_file=$(backup_for $dotfile)
+
+    if [[ $dotfile == "$bundler_path/config" ]] && [[ ! -e "$bundler_path" ]]; then
+        mkdir $bundler_path
+    fi
 
     if [[ -e $dotfile ]]; then
         # mv wasn't working for ~/.bundle/config for some reason
