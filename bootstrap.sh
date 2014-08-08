@@ -14,6 +14,7 @@ bundler_jobs=1
 bundler_jobs_set=false
 bundler_path="$HOME/.bundle"
 verbose_output=false
+username=$(whoami)
 
 function parse_args() {
     for opt in "$@"
@@ -26,6 +27,10 @@ function parse_args() {
 
             -v | --verbose)
                 verbose_output=true
+                ;;
+
+            -u=* | --username=*)
+                username="${opt#*=}"
                 ;;
 
             *)
@@ -63,6 +68,7 @@ function link_dotfiles() {
 
         make_backup $link_path
         ln -s $target_path $link_path
+        chown -R $username:$username $link_path
 
         if verbose; then
             green_link=$(change_color $green $link_path)
@@ -107,12 +113,14 @@ function make_backup() {
 
     if [[ $dotfile == "$bundler_path/config" ]] && [[ ! -e "$bundler_path" ]]; then
         mkdir $bundler_path
+        chown -R $username:$username $bundler_path
     fi
 
     if [[ -e $dotfile ]]; then
         # mv wasn't working for ~/.bundle/config for some reason
         cat $dotfile > $backup_file
         rm $dotfile
+        chown -R $username:$username $backup_file
 
         if verbose; then
             echo "created backup file $(change_color $green $backup_file)"
