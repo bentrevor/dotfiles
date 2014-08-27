@@ -1,0 +1,16 @@
+function dull_red()     {echo "$(tput setaf 1)$1$(tput sgr0)"}
+function dull_green()   {echo "$(tput setaf 2)$1$(tput sgr0)"}
+function dull_yellow()  {echo "$(tput setaf 3)$1$(tput sgr0)"}
+function dull_blue()    {echo "$(tput setaf 4)$1$(tput sgr0)"}
+function dull_magenta() {echo "$(tput setaf 5)$1$(tput sgr0)"}
+function dull_cyan()    {echo "$(tput setaf 6)$1$(tput sgr0)"}
+function dull_white()   {echo "$(tput setaf 7)$1$(tput sgr0)"}
+function dull_black()   {echo "$(tput setaf 8)$1$(tput sgr0)"}
+function hot_red()      {echo "$(tput setaf 9)$1$(tput sgr0)"}
+function hot_green()    {echo "$(tput setaf 10)$1$(tput sgr0)"}
+function hot_yellow()   {echo "$(tput setaf 11)$1$(tput sgr0)"}
+function hot_blue()     {echo "$(tput setaf 12)$1$(tput sgr0)"}
+function hot_magenta()  {echo "$(tput setaf 13)$1$(tput sgr0)"}
+function hot_cyan()     {echo "$(tput setaf 14)$1$(tput sgr0)"}
+function hot_white()    {echo "$(tput setaf 15)$1$(tput sgr0)"}
+function hot_black()    {echo "$(tput setaf 16)$1$(tput sgr0)"}
