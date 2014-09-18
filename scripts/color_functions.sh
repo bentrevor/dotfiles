@@ -32,7 +32,7 @@ if [ "$1" = '--debug' ]; then
     echo "hot_magenta:  \t $(hot_magenta  'lean over the bowl')"
     echo "hot_cyan:     \t $(hot_cyan     'and then take a dive.')"
     echo "hot_white:    \t $(hot_white    'all of you are dead.')"
-    echo "hot_black:    \t $(hot_black    'i am alive.')"
+    echo "hot_black:    \t $(hot_black    'i am alive.')\n"
 fi
 
 # for debugging
@@ -44,5 +44,5 @@ if [ "$1" = '--bold' ]; then
     echo "magenta:  \t $(tput bold)$(hot_magenta  'lean over the bowl')"
     echo "cyan:     \t $(tput bold)$(hot_cyan     'and then take a dive.')"
     echo "white:    \t $(tput bold)$(hot_white    'all of you are dead.')"
-    echo "black:    \t $(tput bold)$(hot_black    'i am alive.')"
+    echo "black:    \t $(tput bold)$(hot_black    'i am alive.')\n"
 fi
